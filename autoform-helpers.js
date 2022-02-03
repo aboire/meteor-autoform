@@ -3,7 +3,7 @@ import { isFunction } from './common'
 
 /* global arrayTracker, AutoForm */
 
-function parseOptions (options, helperName, skipSchema) {
+function parseOptions(options, helperName, skipSchema) {
   const hash = (options || {}).hash || {}
   // Find the form's schema
   const ss = skipSchema === true ? {} : AutoForm.getFormSchema()
@@ -20,7 +20,7 @@ function parseOptions (options, helperName, skipSchema) {
  * @param {Object} options
  * @return {*}
  */
-export const autoFormFieldMessage = function autoFormFieldMessage (options) {
+export const autoFormFieldMessage = function autoFormFieldMessage(options) {
   options = parseOptions(options, 'afFieldMessage')
   const formId = AutoForm.getFormId()
 
@@ -37,7 +37,7 @@ Template.registerHelper('afFieldMessage', autoFormFieldMessage)
  * @param {Object} options
  * @return {*}
  */
-export const autoFormFieldIsInvalid = function autoFormFieldIsInvalid (options) {
+export const autoFormFieldIsInvalid = function autoFormFieldIsInvalid(options) {
   options = parseOptions(options, 'afFieldIsInvalid')
   const formId = AutoForm.getFormId()
 
@@ -54,7 +54,7 @@ Template.registerHelper('afFieldIsInvalid', autoFormFieldIsInvalid)
  * @param {Object} options
  * @return {boolean}
  */
-export const autoFormArrayFieldHasMoreThanMinimum = function autoFormArrayFieldHasMoreThanMinimum (
+export const autoFormArrayFieldHasMoreThanMinimum = function autoFormArrayFieldHasMoreThanMinimum(
   options
 ) {
   options = parseOptions(options, 'afArrayFieldHasMoreThanMinimum')
@@ -88,7 +88,7 @@ Template.registerHelper(
  * @param {Object} options
  * @return {boolean}
  */
-export const autoFormArrayFieldHasLessThanMaximum = function autoFormArrayFieldHasLessThanMaximum (
+export const autoFormArrayFieldHasLessThanMaximum = function autoFormArrayFieldHasLessThanMaximum(
   options
 ) {
   options = parseOptions(options, 'afArrayFieldHasLessThanMaximum')
@@ -122,7 +122,7 @@ Template.registerHelper(
  * @param {Object} options
  * @return {boolean}
  */
-export const autoFormFieldValueIs = function autoFormFieldValueIs (options) {
+export const autoFormFieldValueIs = function autoFormFieldValueIs(options) {
   options = parseOptions(options, 'afFieldValueIs', true)
 
   const currentValue = AutoForm.getFieldValue(options.name, options.formId)
@@ -138,7 +138,7 @@ Template.registerHelper('afFieldValueIs', autoFormFieldValueIs)
  * @param {Object} options
  * @return {Any}
  */
-export const autoFormFieldValue = function autoFormFieldValue (options) {
+export const autoFormFieldValue = function autoFormFieldValue(options) {
   options = parseOptions(options, 'afFieldValue', true)
 
   return AutoForm.getFieldValue(
@@ -156,7 +156,7 @@ Template.registerHelper('afFieldValue', autoFormFieldValue)
  * @name afArrayFieldIsFirstVisible
  * @return {*}
  */
-export const autoFormArrayFieldIsFirstVisible = function autoFormArrayFieldIsFirstVisible () {
+export const autoFormArrayFieldIsFirstVisible = function autoFormArrayFieldIsFirstVisible() {
   const context = this
   return arrayTracker.isFirstFieldlVisible(
     context.formId,
@@ -176,7 +176,7 @@ Template.registerHelper(
  * @name afArrayFieldIsLastVisible
  * @return {*}
  */
-export const autoFormArrayFieldIsLastVisible = function autoFormArrayFieldIsLastVisible () {
+export const autoFormArrayFieldIsLastVisible = function autoFormArrayFieldIsLastVisible() {
   const context = this
   return arrayTracker.isLastFieldlVisible(
     context.formId,
@@ -192,7 +192,7 @@ Template.registerHelper(
   autoFormArrayFieldIsLastVisible
 )
 
-export const autoFormFieldValueContains = function autoFormFieldValueContains (
+export const autoFormFieldValueContains = function autoFormFieldValueContains(
   options
 ) {
   options = parseOptions(options, 'afFieldValueContains', true)
@@ -215,7 +215,7 @@ Template.registerHelper('afFieldValueContains', autoFormFieldValueContains)
  * @param {Object} options
  * @return {Object}
  */
-export const autoFormFieldLabelText = function autoFormFieldLabelText (options) {
+export const autoFormFieldLabelText = function autoFormFieldLabelText(options) {
   options = parseOptions(options, 'afFieldLabelText', true)
   return AutoForm.getLabelForField(options.name)
 }
@@ -229,7 +229,7 @@ Template.registerHelper('afFieldLabelText', autoFormFieldLabelText)
  * @param {Object} options
  * @return {{name: *}[]}
  */
-export const autoFormFieldNames = function autoFormFieldNames (options) {
+export const autoFormFieldNames = function autoFormFieldNames(options) {
   // TODO move to ES6 after we have tested most of this function's branches
   options = parseOptions(options, 'afFieldNames')
   const ss = options.ss
@@ -286,14 +286,14 @@ export const autoFormFieldNames = function autoFormFieldNames (options) {
         })
       }
 
-      fieldList = fieldList.filter(function filterFieldsByName (field) {
+      fieldList = fieldList.filter(function filterFieldsByName(field) {
         return field.indexOf(namePlusDot) === 0
       })
     }
 
     // If top level fields, be sure to remove any with $ in them
     else {
-      fieldList = fieldList.filter(function filterArrayFields (field) {
+      fieldList = fieldList.filter(function filterArrayFields(field) {
         return field.slice(-2) !== '.$' && field.indexOf('.$.') === -1
       })
     }
@@ -354,7 +354,7 @@ export const autoFormFieldNames = function autoFormFieldNames (options) {
   }
 
   // Filter out fields we never want
-  fieldList = fieldList.filter(function shouldIncludeField (field) {
+  fieldList = fieldList.filter(function shouldIncludeField(field) {
     const fieldDefs = AutoForm.Utility.getFieldDefinition(ss, field)
 
     // Don't include fields that are not in the schema
@@ -408,7 +408,7 @@ Template.registerHelper('afFieldNames', autoFormFieldNames)
  * @name afSelectOptionAtts
  * @return {*}
  */
-export const afSelectOptionAtts = function afSelectOptionAtts () {
+export const afSelectOptionAtts = function afSelectOptionAtts() {
   if (this.value === false) this.value = 'false'
   const atts = 'value' in this ? { value: this.value } : {}
   if (this.selected) {
@@ -425,7 +425,28 @@ export const afSelectOptionAtts = function afSelectOptionAtts () {
  */
 Template.registerHelper('afSelectOptionAtts', afSelectOptionAtts)
 
+/**
+ * @name afAutocompleteSuggestionAtts
+ * @return {*}
+ */
+export const afAutocompleteSuggestionAtts = function afAutocompleteSuggestionAtts() {
+  if (this.value === false) this.value = 'false'
+  const atts = 'value' in this ? { value: this.value } : {}
+  if (this.selected) {
+    atts.selected = ''
+  }
+  if (this.htmlAtts) {
+    Object.assign(atts, this.htmlAtts)
+  }
+  return atts
+}
+
+/*
+ * afAutocompleteSuggetionAtts
+ */
+Template.registerHelper('afAutocompleteSuggestionAtts', afAutocompleteSuggestionAtts)
+
 // Expects to be called with this.name available
-Template.registerHelper('afOptionsFromSchema', function afOptionsFromSchema () {
+Template.registerHelper('afOptionsFromSchema', function afOptionsFromSchema() {
   return AutoForm._getOptionsForField(this.name)
 })

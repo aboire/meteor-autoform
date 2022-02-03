@@ -1,6 +1,6 @@
 let initialized = false
 
-AutoForm.load = async function load () {
+AutoForm.load = async function load() {
   if (!initialized) {
     await init()
     initialized = true
@@ -9,7 +9,7 @@ AutoForm.load = async function load () {
   return initialized
 }
 
-function init () {
+function init() {
   return Promise.all([
     import('./autoform-helpers.js'),
     // form types
@@ -23,6 +23,8 @@ function init () {
     import('./formTypes/disabled.js'),
     // input types
     import('./inputTypes/value-converters.js'),
+    import('./inputTypes/autocomplete/autocomplete.html'),
+    import('./inputTypes/autocomplete/autocomplete.js'),
     import('./inputTypes/boolean-checkbox/boolean-checkbox.html'),
     import('./inputTypes/boolean-checkbox/boolean-checkbox.js'),
     import('./inputTypes/boolean-radios/boolean-radios.html'),

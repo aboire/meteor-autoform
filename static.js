@@ -10,6 +10,8 @@ import './formTypes/readonly.js'
 import './formTypes/disabled.js'
 // input types
 import './inputTypes/value-converters.js'
+import './inputTypes/autocomplete/autocomplete.html'
+import './inputTypes/autocomplete/autocomplete.js'
 import './inputTypes/boolean-checkbox/boolean-checkbox.html'
 import './inputTypes/boolean-checkbox/boolean-checkbox.js'
 import './inputTypes/boolean-radios/boolean-radios.html'
@@ -99,4 +101,4 @@ import './components/afQuickFields/afQuickFields.js'
 // event handling
 import './autoform-events.js'
 
-AutoForm.load = () => {} // keep isomorph with dynamic version
+AutoForm.load = () => { } // keep isomorph with dynamic version
